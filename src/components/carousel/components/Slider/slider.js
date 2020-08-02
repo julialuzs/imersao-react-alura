@@ -38,16 +38,29 @@ export const SliderItem = styled.li`
   }
 `;
 
+// TODO implement custom arrow
+function CustomArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", background: "green" }}
+      onClick={onClick}
+    />
+  );
+}
 
 const Slider = ({ children }) => (
   <Container>
     <SlickSlider {...{
       dots: false,
-      infinite: false,
-      speed: 300,
+      infinite: true,
+      speed: 400,
       centerMode: false,
       variableWidth: true,
       adaptiveHeight: true,
+      // nextArrow: <CustomArrow />,
+      // prevArrow: <CustomArrow />
     }}
     >
       {children}
