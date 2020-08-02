@@ -1,16 +1,17 @@
 import React from 'react';
 import Button from '../button/button';
-import logo from '../../assets/app-logo.png';
+import logo from '../../assets/logo.png';
+import { Link } from 'react-router-dom';
 import './header.css';
 
 function Header() {
 	return (
 		<nav className="header">
-			<a href="/">
+			<Link to="/">
 				<img className="logo" alt="logo" src={logo}/>
-			</a>
+			</Link>
 
-			<Button as="a" className="button-link" href="/novo-video">Novo vídeo</Button>
+			<Button as={Link} className="button-link" to="/register/video">New video</Button>
 		</nav>
 	);
 }
