@@ -5,7 +5,7 @@ import initialData from '../../data/initial-data.json';
 import MainBanner from '../../components/main-banner/main-banner';
 import Carousel from '../../components/carousel/carousel';
 
-function Home() {
+export function Home() {
   return (
     <div style={{ background: "#141414" }}>
       <Header/>
@@ -19,5 +19,3 @@ function Home() {
     </div>
   );
 }
-
-export default Home;

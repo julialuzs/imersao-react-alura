@@ -2,7 +2,7 @@ import React from 'react';
 import PageDefault from '../../page-default';
 import { Link } from 'react-router-dom';
 
-function RegisterCategory() {
+export function RegisterCategory() {
   return (
     <PageDefault>
       <h1>Add new Category</h1>
@@ -10,5 +10,3 @@ function RegisterCategory() {
     </PageDefault>
   );
 }
-
-export default RegisterCategory;
