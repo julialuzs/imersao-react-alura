@@ -14,7 +14,7 @@ export function Home() {
          url={initialData.categorias[0].videos[0].url}
          videoDescription={"desc"}
       />
-      { initialData.categorias.map(category => <Carousel category={category}/>) }
+      { initialData.categorias.map((category, idx) => <Carousel key={idx} category={category}/>) }
       <Footer/>
     </div>
   );
