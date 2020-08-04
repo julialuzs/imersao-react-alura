@@ -15,10 +15,10 @@ const Button = styled.button`
 	display: inline-block;
 	transition: opacity .3s;
 
-  &:hover,
-  &:focus {
-	  opacity: .5;
-  }
+	&:hover,
+	&:focus {
+		opacity: .5;
+	}
 `;
 
 export default Button;

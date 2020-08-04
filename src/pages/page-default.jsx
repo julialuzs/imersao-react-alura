@@ -1,7 +1,7 @@
 import React from 'react';
+import styled from 'styled-components';
 import Footer from '../components/footer/footer';
 import Header from '../components/header/header';
-import styled from 'styled-components';
 
 const Main = styled.main`
   background-color: var(--black);
@@ -15,11 +15,11 @@ const Main = styled.main`
 function PageDefault({ children }) {
   return (
     <>
-      <Header/>
-        <Main>
-          {children}
-        </Main>
-      <Footer/>
+      <Header />
+      <Main>
+        {children}
+      </Main>
+      <Footer />
     </>
   );
 }
