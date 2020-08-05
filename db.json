@@ -1,0 +1,10 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "category 1",
+      "description": "aaaaaaaaaa bbbbb cccc",
+      "color": "#fff"
+    }
+  ]
+}

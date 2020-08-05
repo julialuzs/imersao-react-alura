@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PageDefault from '../../page-default';
 import FormField from '../../../components/form-field/form-field';
@@ -26,6 +26,15 @@ export function RegisterCategory() {
   function handleChange({ target }) {
     setValue(target.name, target.value);
   }
+
+  useEffect(() => {
+    const URL = 'http://localhost:8080/categories';
+    fetch(URL)
+      .then(async (response) => {
+        const responseString = await response.json();
+        setCategories([...responseString]);
+      });
+  }, []);
 
   return (
     <PageDefault>
