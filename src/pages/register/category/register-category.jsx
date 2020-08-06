@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import PageDefault from '../../page-default';
 import FormField from '../../../components/form-field/form-field';
 import Button from '../../../components/button/button';
+import { BASE_URL } from '../../../utils/constants';
 
 export function RegisterCategory() {
   const category = {
@@ -14,9 +15,35 @@ export function RegisterCategory() {
   const [categories, setCategories] = useState([]);
   const [values, setValues] = useState(category);
 
+  function addNewCategory(newCategory) {
+    const URL = `${BASE_URL}/categories`;
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(newCategory),
+    };
+
+    fetch(URL, options)
+      .then(async (response) => {
+        const responseString = await response.json();
+        setCategories([...[responseString], ...categories]);
+      });
+  }
+
+  useEffect(() => {
+    const URL = `${BASE_URL}/categories`;
+    fetch(URL)
+      .then(async (response) => {
+        const responseString = await response.json();
+        setCategories([...responseString]);
+      });
+  }, []);
+
   function handleSubmit(event) {
     event.preventDefault();
-    setCategories([...categories, values]);
+    addNewCategory(values);
   }
 
   function setValue(key, value) {
@@ -26,15 +53,6 @@ export function RegisterCategory() {
   function handleChange({ target }) {
     setValue(target.name, target.value);
   }
-
-  useEffect(() => {
-    const URL = 'http://localhost:8080/categories';
-    fetch(URL)
-      .then(async (response) => {
-        const responseString = await response.json();
-        setCategories([...responseString]);
-      });
-  }, []);
 
   return (
     <PageDefault>
@@ -75,6 +93,10 @@ export function RegisterCategory() {
         categories.map((item) => (
           <li key={`${item.id}`}>
             { item.name }
+            {' '}
+            |
+            {' '}
+            { item.description }
           </li>
         ))
       }

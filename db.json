@@ -5,6 +5,24 @@
       "name": "category 1",
       "description": "aaaaaaaaaa bbbbb cccc",
       "color": "#fff"
+    },
+    {
+      "name": "Julia",
+      "description": "julia - description ",
+      "color": "#cc2e2e",
+      "id": 2
+    },
+    {
+      "name": "bom dia",
+      "description": "bom dia julia tudo bom contigo",
+      "color": "#4bd539",
+      "id": 3
+    },
+    {
+      "name": "name",
+      "description": "descprition",
+      "color": "#c47821",
+      "id": 4
     }
   ]
 }
