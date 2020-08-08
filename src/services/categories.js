@@ -5,6 +5,18 @@ export class CategoryService {
     this.url = `${BASE_URL}/categories`;
   }
 
+  getAll() {
+    return fetch(`${this.url}`)
+      .then(async (response) => {
+        if (response.ok) {
+          const responseString = await response.json();
+          return responseString;
+        }
+
+        throw new Error(response.statusText);
+      });
+  }
+
   getCategoriesWithVideos() {
     return fetch(`${this.url}?_embed=videos`)
       .then(async (response) => {
@@ -17,7 +29,7 @@ export class CategoryService {
       });
   }
 
-  getCategoryById(id) {
+  getById(id) {
     return fetch(`${this.url}/${id}`)
       .then(async (response) => {
         const responseString = await response.json();
