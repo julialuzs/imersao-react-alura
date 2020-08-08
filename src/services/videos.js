@@ -1,12 +1,12 @@
 import { BASE_URL } from '../config/config';
 
-export class CategoryService {
+export class VideoService {
   constructor() {
-    this.url = `${BASE_URL}/categories`;
+    this.url = `${BASE_URL}/videos`;
   }
 
-  getCategoriesWithVideos() {
-    return fetch(`${this.url}?_embed=videos`)
+  getAll() {
+    return fetch(`${this.url}`)
       .then(async (response) => {
         if (response.ok) {
           const responseString = await response.json();
@@ -17,7 +17,7 @@ export class CategoryService {
       });
   }
 
-  getCategoryById(id) {
+  getById(id) {
     return fetch(`${this.url}/${id}`)
       .then(async (response) => {
         const responseString = await response.json();
@@ -25,19 +25,23 @@ export class CategoryService {
       });
   }
 
-  add(category) {
+  add(video) {
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
-      body: JSON.stringify(category),
+      body: JSON.stringify(video),
     };
 
-    fetch(`${this.url}`, options)
+    return fetch(`${this.url}`, options)
       .then(async (response) => {
-        const responseString = await response.json();
-        console.log(responseString);
+        if (response.ok) {
+          const responseString = await response.json();
+          return responseString;
+        }
+
+        throw new Error(response.statusText);
       });
   }
 
