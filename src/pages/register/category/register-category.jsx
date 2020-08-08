@@ -1,19 +1,20 @@
 /* eslint-disable import/prefer-default-export */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import PageDefault from '../../page-default';
-import FormField from '../../../components/form-field/form-field';
 import Button from '../../../components/button/button';
-import { BASE_URL } from '../../../utils/constants';
+import FormField from '../../../components/form-field/form-field';
+import { BASE_URL } from '../../../config/config';
+import { useForm } from '../../../hooks/useForm';
+import PageDefault from '../../page-default';
 
 export function RegisterCategory() {
-  const category = {
+  const initialValue = {
     name: '',
     description: '',
     color: '#000',
   };
   const [categories, setCategories] = useState([]);
-  const [values, setValues] = useState(category);
+  const { handleChange, clearForm, values } = useForm(initialValue);
 
   function addNewCategory(newCategory) {
     const URL = `${BASE_URL}/categories`;
@@ -44,29 +45,22 @@ export function RegisterCategory() {
   function handleSubmit(event) {
     event.preventDefault();
     addNewCategory(values);
-  }
-
-  function setValue(key, value) {
-    setValues({ ...values, [key]: value });
-  }
-
-  function handleChange({ target }) {
-    setValue(target.name, target.value);
+    clearForm();
   }
 
   return (
     <PageDefault>
       <h1>
         Add new Category:
-        {values.name}
+        {values.title}
       </h1>
 
       <form onSubmit={handleSubmit}>
         <FormField
           type="text"
-          name="name"
+          name="title"
           label="Name"
-          value={values.name}
+          value={values.title}
           onChange={handleChange}
         />
 
@@ -92,10 +86,8 @@ export function RegisterCategory() {
       {
         categories.map((item) => (
           <li key={`${item.id}`}>
-            { item.name }
-            {' '}
-            |
-            {' '}
+            { item.title }
+            {' '} | {' '}
             { item.description }
           </li>
         ))

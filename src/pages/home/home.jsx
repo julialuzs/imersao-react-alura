@@ -1,28 +1,37 @@
-import React from 'react';
-import Header from '../../components/header/header';
-import Footer from '../../components/footer/footer';
-import initialData from '../../data/initial-data.json';
-import MainBanner from '../../components/main-banner/main-banner';
+import React, { useEffect, useState } from 'react';
 import Carousel from '../../components/carousel/carousel';
+import Loader from '../../components/loader/loader';
+import MainBanner from '../../components/main-banner/main-banner';
+import { CategoryService } from '../../services/categories';
+import PageDefault from '../page-default';
 
 export function Home() {
+  const [categories, setCategories] = useState([]);
+  const categoryService = new CategoryService();
+
+  useEffect(() => {
+    categoryService.getCategoriesWithVideos()
+      .then((response) => {
+        setCategories(response);
+      });
+  }, []);
+
   return (
-    <div style={{ background: '#141414' }}>
-      <Header />
-      <MainBanner
-        videoTitle={initialData.categorias[0].videos[0].titulo}
-        url={initialData.categorias[0].videos[0].url}
-        videoDescription="desc"
-      />
-      {
-        initialData.categorias.map((category) => (
-          <Carousel
-            key={category.name}
-            category={category}
+    <PageDefault paddingAll={0}>
+      {categories.length === 0 ? (<Loader />) : (
+        <>
+          <MainBanner
+            videoTitle={categories[0].videos[0].title}
+            url={categories[0].videos[0].url}
+            videoDescription="desc"
           />
-        ))
-      }
-      <Footer />
-    </div>
+          {
+            categories.map((category) => (
+              <Carousel key={category.id} category={category} />
+            ))
+          }
+        </>
+      )}
+    </PageDefault>
   );
 }
